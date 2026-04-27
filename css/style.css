@@ -1,0 +1,686 @@
+/* ============================================
+   HYPERLOCAL FREELANCE HUB - STYLESHEET
+   Responsive, Modern, Clean UI
+   ============================================ */
+
+/* CSS Variables (Theming) */
+:root {
+    --primary-color: #667eea;
+    --primary-dark: #5a67d8;
+    --primary-light: #7f9cf5;
+    --secondary-color: #764ba2;
+    --success-color: #48bb78;
+    --danger-color: #f56565;
+    --warning-color: #ed8936;
+    --dark-color: #2d3748;
+    --gray-color: #718096;
+    --light-gray: #e2e8f0;
+    --lighter-gray: #f7fafc;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--dark-color);
+    line-height: 1.5;
+}
+
+/* App Container */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--lighter-gray);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   HEADER / NAVBAR
+   ============================================ */
+.main-header {
+    background: var(--white);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.logo i {
+    font-size: 1.8rem;
+}
+
+.logo span {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+main {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+/* Screens (shown/hidden via JS) */
+.screen {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cards */
+.card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subtitle {
+    color: var(--gray-color);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    margin-bottom: 1.5rem;
+}
+
+.dashboard-header h2 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+}
+
+.dashboard-header p {
+    color: var(--gray-color);
+}
+
+/* ============================================
+   FORMS & INPUTS
+   ============================================ */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    font-size: 0.9rem;
+}
+
+.form-group label i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--gray-color);
+    opacity: 0.6;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-group.half {
+    flex: 1;
+    min-width: 120px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.hint {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--gray-color);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-success {
+    background: var(--success-color);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background: #38a169;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background: #e53e3e;
+}
+
+.btn-link {
+    background: transparent;
+    color: var(--primary-color);
+}
+
+.btn-link:hover {
+    background: var(--lighter-gray);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   OTP METHOD SELECTOR
+   ============================================ */
+.otp-method-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.method-btn {
+    flex: 1;
+    padding: 0.75rem;
+    background: var(--lighter-gray);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.method-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+.method-btn:hover:not(.active) {
+    background: var(--light-gray);
+}
+
+/* ============================================
+   ROLE SELECTION CARDS
+   ============================================ */
+.role-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.role-card {
+    background: var(--lighter-gray);
+    border: 2px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.role-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.role-card.selected {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+.role-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.role-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.role-card p {
+    font-size: 0.85rem;
+    color: var(--gray-color);
+    margin-bottom: 0.75rem;
+}
+
+.role-badge {
+    display: inline-block;
+    background: var(--light-gray);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--gray-color);
+}
+
+/* ============================================
+   GIGS LIST / CARDS
+   ============================================ */
+.gigs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gig-card {
+    background: var(--lighter-gray);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    transition: var(--transition);
+    border: 1px solid var(--light-gray);
+}
+
+.gig-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.gig-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.gig-description {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 0.75rem;
+}
+
+.gig-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.gig-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 20px;
+}
+
+.gig-meta i {
+    color: var(--primary-color);
+}
+
+.gig-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray-color);
+    background: var(--lighter-gray);
+    border-radius: var(--radius-md);
+}
+
+/* Application Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status-accepted {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.status-completed {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.main-footer {
+    background: var(--white);
+    text-align: center;
+    padding: 1rem;
+    color: var(--gray-color);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN (Mobile First)
+   ============================================ */
+
+/* Tablet (768px and up) */
+@media (min-width: 768px) {
+    .app-container {
+        border-radius: 0;
+    }
+    
+    .card {
+        padding: 2rem;
+    }
+    
+    .role-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .form-row {
+        flex-wrap: nowrap;
+    }
+    
+    main {
+        padding: 2rem;
+    }
+}
+
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+    .app-container {
+        margin: 2rem auto;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+    }
+    
+    .role-options {
+        gap: 2rem;
+    }
+    
+    .gigs-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1rem;
+    }
+    
+    .gig-card {
+        margin-bottom: 0;
+    }
+}
+
+/* Mobile (480px and down) */
+@media (max-width: 480px) {
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+    
+    .card h2 {
+        font-size: 1.25rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1rem;
+    }
+    
+    .role-card {
+        padding: 1rem;
+    }
+    
+    .role-card i {
+        font-size: 1.8rem;
+    }
+    
+    .otp-method-selector {
+        flex-direction: column;
+    }
+    
+    .method-btn {
+        width: 100%;
+    }
+}
+
+/* Small phones (380px and down) */
+@media (max-width: 380px) {
+    main {
+        padding: 1rem;
+    }
+    
+    .gig-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .gig-actions {
+        flex-direction: column;
+    }
+    
+    .btn-sm {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+.text-warning {
+    color: var(--warning-color);
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+    .btn, .header-actions {
+        display: none;
+    }
+}
+
+/* Loading State (optional) */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}

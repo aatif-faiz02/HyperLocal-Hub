@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>HyperLocal Freelance Hub | Local Gigs. Trusted People.</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="main-header">
+            <div class="logo">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>HyperLocal</span>
+            </div>
+            <div class="header-actions" id="headerActions"></div>
+        </header>
+
+        <main id="mainContent">
+            
+            <!-- SCREEN 1: SIGNUP SCREEN -->
+            <div id="signupScreen" class="screen active">
+                <div class="card">
+                    <h2><i class="fas fa-user-plus"></i> Get Started</h2>
+                    <p class="subtitle">Join your local freelance community</p>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="fullName" placeholder="e.g., Rahul Sharma">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="email" placeholder="rahul@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+91 98765 43210">
+                    </div>
+                    
+                    <button id="sendOtpBtn" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> Send Verification Code
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 1rem;">
+                        <a href="#" id="showLoginBtn" style="color: #667eea; text-decoration: none;">
+                            <i class="fas fa-sign-in-alt"></i> Already have an account? Login
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: LOGIN SCREEN -->
+            <div id="loginScreen" class="screen">
+                <div class="card">
+                    <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+                    <p class="subtitle">Enter your email or phone to receive OTP</p>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email or Phone</label>
+                        <input type="text" id="loginIdentifier" placeholder="email@example.com or +91 98765 43210">
+                    </div>
+                    
+                    <button id="sendLoginOtpBtn" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> Send Login OTP
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 1rem;">
+                        <a href="#" id="showSignupFromLoginBtn" style="color: #667eea; text-decoration: none;">
+                            <i class="fas fa-user-plus"></i> New user? Create account
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- SCREEN 3: OTP VERIFICATION SCREEN -->
+            <div id="otpScreen" class="screen">
+                <div class="card">
+                    <h2><i class="fas fa-key"></i> Verify Your Identity</h2>
+                    <p class="subtitle">We've sent a code to <strong><span id="verificationTarget"></span></strong></p>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Enter OTP Code</label>
+                        <input type="text" id="otpCode" placeholder="Enter 6-digit code" maxlength="6">
+                        <small class="hint">Demo: Use code <strong>123456</strong></small>
+                    </div>
+                    
+                    <button id="verifyOtpBtn" class="btn btn-success btn-block">
+                        <i class="fas fa-check-circle"></i> Verify & Continue
+                    </button>
+                    
+                    <button id="resendOtpBtn" class="btn btn-link btn-block">
+                        <i class="fas fa-redo"></i> Resend Code
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 4: ROLE SELECTION SCREEN -->
+            <div id="roleScreen" class="screen">
+                <div class="card">
+                    <h2><i class="fas fa-briefcase"></i> How will you use HyperLocal?</h2>
+                    <p class="subtitle">Choose your role to continue</p>
+                    
+                    <div class="role-options">
+                        <div class="role-card" data-role="client">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Client</h3>
+                            <p>I want to hire professionals for tasks</p>
+                            <span class="role-badge">Post gigs, hire local talent</span>
+                        </div>
+                        
+                        <div class="role-card" data-role="worker">
+                            <i class="fas fa-tools"></i>
+                            <h3>Worker</h3>
+                            <p>I want to offer my skills and earn</p>
+                            <span class="role-badge">Find gigs, get paid</span>
+                        </div>
+                    </div>
+                    
+                    <button id="confirmRoleBtn" class="btn btn-primary btn-block" disabled>
+                        Continue to Dashboard <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 5: PROFILE COMPLETION SCREEN -->
+            <div id="profileScreen" class="screen">
+                <div class="card">
+                    <h2><i class="fas fa-id-card"></i> Complete Your Profile</h2>
+                    <p class="subtitle">Help others trust you</p>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Location (Address / Pin code)</label>
+                        <input type="text" id="location" placeholder="e.g., Koramangala, Bangalore - 560034">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-image"></i> Profile Photo URL (optional)</label>
+                        <input type="text" id="profilePhoto" placeholder="https://example.com/photo.jpg or leave blank">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Bio / About You</label>
+                        <textarea id="bio" rows="3" placeholder="Tell people about yourself..."></textarea>
+                    </div>
+                    
+                    <div id="workerFields" style="display: none;">
+                        <div class="form-group">
+                            <label><i class="fas fa-cogs"></i> Skills (comma separated)</label>
+                            <input type="text" id="skills" placeholder="e.g., Plumbing, Tutoring, Delivery">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-dollar-sign"></i> Hourly Rate ($)</label>
+                            <input type="number" id="hourlyRate" placeholder="e.g., 25">
+                        </div>
+                    </div>
+                    
+                    <div id="clientFields" style="display: none;">
+                        <div class="form-group">
+                            <label><i class="fas fa-building"></i> Company / Organization (optional)</label>
+                            <input type="text" id="company" placeholder="e.g., HomeFix Solutions">
+                        </div>
+                    </div>
+                    
+                    <button id="completeProfileBtn" class="btn btn-primary btn-block">
+                        <i class="fas fa-check"></i> Complete & Go to Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 6: CLIENT DASHBOARD -->
+            <div id="clientDashboard" class="screen">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-user-tie"></i> Client Dashboard</h2>
+                    <p>Welcome, <span id="clientName"></span>!</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-plus-circle"></i> Post a New Gig</h3>
+                    <div class="form-group">
+                        <input type="text" id="gigTitle" placeholder="Gig title" style="width:100%; padding:0.5rem;">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="gigDesc" rows="2" placeholder="Description" style="width:100%; padding:0.5rem;"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <input type="number" id="gigBudget" placeholder="Budget ($)" style="width:100%; padding:0.5rem;">
+                        </div>
+                        <div class="form-group half">
+                            <input type="text" id="gigLocation" placeholder="Location" style="width:100%; padding:0.5rem;">
+                        </div>
+                    </div>
+                    <button id="postGigBtn" class="btn btn-primary">Post Gig</button>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> My Posted Gigs & Applications</h3>
+                    <div id="clientGigsList" class="gigs-list">
+                        <p class="empty-message">No gigs posted yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCREEN 7: WORKER DASHBOARD -->
+            <div id="workerDashboard" class="screen">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-tools"></i> Worker Dashboard</h2>
+                    <p>Welcome, <span id="workerName"></span>!</p>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Available Gigs Near You</h3>
+                    <div id="availableGigsList" class="gigs-list">
+                        <p class="empty-message">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-file-alt"></i> My Applications</h3>
+                    <div id="myApplicationsList" class="gigs-list">
+                        <p class="empty-message">No applications yet.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        
+        <footer class="main-footer">
+            <p>&copy; 2024 HyperLocal Freelance Hub | Prototype Demo</p>
+        </footer>
+        
+    </div>
+
+    <!-- ========== ALL JAVASCRIPT ========== -->
+    <script>
+        // ========== DATA LAYER ==========
+        window.Data = {
+            users: [],
+            gigs: [],
+            applications: [],
+            currentUser: null,
+            nextUserId: 1,
+            nextGigId: 1,
+            nextApplicationId: 1,
+
+            addUser: function(userData) {
+                const newUser = {
+                    id: this.nextUserId++,
+                    name: userData.name,
+                    email: userData.email,
+                    phone: userData.phone,
+                    role: userData.role || null,
+                    isVerified: userData.isVerified || false,
+                    location: userData.location || '',
+                    bio: userData.bio || '',
+                    profilePhoto: userData.profilePhoto || '',
+                    skills: userData.skills || [],
+                    hourlyRate: userData.hourlyRate || null,
+                    company: userData.company || null,
+                    createdAt: new Date().toISOString()
+                };
+                this.users.push(newUser);
+                return newUser;
+            },
+            
+            findUserByEmail: function(email) {
+                return this.users.find(user => user.email === email);
+            },
+            
+            findUserByPhone: function(phone) {
+                return this.users.find(user => user.phone === phone);
+            },
+            
+            findUserByIdentifier: function(identifier) {
+                return this.findUserByEmail(identifier) || this.findUserByPhone(identifier);
+            },
+            
+            findUserById: function(id) {
+                return this.users.find(user => user.id === id);
+            },
+            
+            setUserRole: function(email, role) {
+                const user = this.findUserByEmail(email);
+                if (user) { user.role = role; return true; }
+                return false;
+            },
+            
+            completeProfile: function(email, profileData) {
+                const user = this.findUserByEmail(email);
+                if (user) {
+                    user.location = profileData.location || user.location;
+                    user.bio = profileData.bio || user.bio;
+                    user.profilePhoto = profileData.profilePhoto || user.profilePhoto;
+                    if (user.role === 'worker') {
+                        user.skills = profileData.skills ? profileData.skills.split(',').map(s => s.trim()) : [];
+                        user.hourlyRate = profileData.hourlyRate || null;
+                    } else if (user.role === 'client') {
+                        user.company = profileData.company || null;
+                    }
+                    return true;
+                }
+                return false;
+            },
+            
+            setCurrentUser: function(email) {
+                this.currentUser = this.findUserByEmail(email);
+                return this.currentUser;
+            },
+            
+            getCurrentUser: function() { return this.currentUser; },
+            
+            logout: function() { this.currentUser = null; },
+            
+            addGig: function(gigData) {
+                const newGig = {
+                    id: this.nextGigId++,
+                    clientId: gigData.clientId,
+                    clientName: gigData.clientName,
+                    title: gigData.title,
+                    description: gigData.description,
+                    budget: gigData.budget,
+                    location: gigData.location,
+                    status: 'open',
+                    createdAt: new Date().toISOString(),
+                    hiredWorkerId: null
+                };
+                this.gigs.push(newGig);
+                return newGig;
+            },
+            
+            getOpenGigs: function() { return this.gigs.filter(gig => gig.status === 'open'); },
+            
+            getGigsByClient: function(clientId) { return this.gigs.filter(gig => gig.clientId === clientId); },
+            
+            getGigById: function(gigId) { return this.gigs.find(gig => gig.id === gigId); },
+            
+            updateGigStatus: function(gigId, status, workerId = null) {
+                const gig = this.getGigById(gigId);
+                if (gig) { gig.status = status; if (workerId) gig.hiredWorkerId = workerId; return true; }
+                return false;
+            },
+            
+            addApplication: function(appData) {
+                const existing = this.applications.find(app => app.gigId === appData.gigId && app.workerId === appData.workerId);
+                if (existing) return null;
+                const newApp = {
+                    id: this.nextApplicationId++,
+                    gigId: appData.gigId,
+                    workerId: appData.workerId,
+                    workerName: appData.workerName,
+                    proposal: appData.proposal || '',
+                    status: 'pending',
+                    appliedAt: new Date().toISOString()
+                };
+                this.applications.push(newApp);
+                return newApp;
+            },
+            
+            getApplicationsByGig: function(gigId) { return this.applications.filter(app => app.gigId === gigId); },
+            
+            getApplicationsByWorker: function(workerId) { return this.applications.filter(app => app.workerId === workerId); },
+            
+            getApplicationsByClient: function(clientId) {
+                const clientGigs = this.getGigsByClient(clientId);
+                const clientGigIds = clientGigs.map(gig => gig.id);
+                return this.applications.filter(app => clientGigIds.includes(app.gigId));
+            },
+            
+            updateApplicationStatus: function(appId, status) {
+                const app = this.applications.find(a => a.id === appId);
+                if (app) { 
+                    app.status = status; 
+                    if (status === 'accepted') {
+                        this.updateGigStatus(app.gigId, 'in_progress', app.workerId);
+                    }
+                    return true; 
+                }
+                return false;
+            },
+            
+            hasApplied: function(workerId, gigId) { return this.applications.some(app => app.workerId === workerId && app.gigId === gigId); },
+            
+            loadMockData: function() {
+                if (this.users.length > 0) return;
+                
+                const sampleClient = this.addUser({
+                    name: "Priya Sharma",
+                    email: "priya@example.com",
+                    phone: "+91 98765 00001",
+                    role: "client",
+                    isVerified: true,
+                    location: "Indiranagar, Bangalore",
+                    bio: "Homeowner looking for reliable local help",
+                    company: "Home Solutions Pvt Ltd"
+                });
+                
+                const sampleWorker = this.addUser({
+                    name: "Amit Kumar",
+                    email: "amit@example.com",
+                    phone: "+91 98765 00002",
+                    role: "worker",
+                    isVerified: true,
+                    location: "Koramangala, Bangalore",
+                    bio: "Experienced handyman",
+                    skills: ["Plumbing", "Electrical"],
+                    hourlyRate: 25
+                });
+                
+                this.addGig({
+                    clientId: sampleClient.id,
+                    clientName: sampleClient.name,
+                    title: "Fix leaking kitchen sink",
+                    description: "The sink under my kitchen is leaking. Need someone urgently.",
+                    budget: 35,
+                    location: "Indiranagar, Bangalore"
+                });
+                
+                this.addApplication({
+                    gigId: 1,
+                    workerId: sampleWorker.id,
+                    workerName: sampleWorker.name,
+                    proposal: "I have 5 years of plumbing experience. I can fix this quickly."
+                });
+            }
+        };
+
+        // ========== AUTH LAYER ==========
+        window.Auth = {
+            pendingUser: null,
+            pendingIsLogin: false,
+            currentOtp: '123456',
+            
+            showToast: function(message, type) {
+                const toast = document.createElement('div');
+                toast.style.cssText = `position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:${type === 'error' ? '#f56565' : '#48bb78'}; color:white; padding:12px 24px; border-radius:8px; z-index:1000; font-size:14px; font-weight:500; box-shadow:0 4px 12px rgba(0,0,0,0.15);`;
+                toast.innerHTML = `<i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i> ${message}`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+            },
+            
+            sendSignupOtp: function() {
+                const name = document.getElementById('fullName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                
+                if (!name || !email || !phone) {
+                    this.showToast('Please fill all fields', 'error');
+                    return false;
+                }
+                
+                if (Data.findUserByEmail(email) || Data.findUserByPhone(phone)) {
+                    this.showToast('User already exists! Please login instead.', 'error');
+                    return false;
+                }
+                
+                this.pendingUser = { name, email, phone };
+                this.pendingIsLogin = false;
+                document.getElementById('verificationTarget').innerText = email;
+                this.showToast(`Demo OTP: ${this.currentOtp} sent to ${email}`, 'success');
+                window.App.showScreen('otpScreen');
+                return true;
+            },
+            
+            sendLoginOtp: function() {
+                const identifier = document.getElementById('loginIdentifier').value;
+                if (!identifier) {
+                    this.showToast('Enter email or phone', 'error');
+                    return false;
+                }
+                
+                const user = Data.findUserByIdentifier(identifier);
+                if (!user) {
+                    this.showToast('No account found! Please signup first.', 'error');
+                    return false;
+                }
+                
+                this.pendingUser = user;
+                this.pendingIsLogin = true;
+                document.getElementById('verificationTarget').innerText = identifier;
+                this.showToast(`Demo OTP: ${this.currentOtp} sent to ${identifier}`, 'success');
+                window.App.showScreen('otpScreen');
+                return true;
+            },
+            
+            verifyOtp: function(otp) {
+                if (otp !== this.currentOtp) {
+                    this.showToast('Invalid OTP', 'error');
+                    return false;
+                }
+                
+                if (this.pendingIsLogin) {
+                    Data.setCurrentUser(this.pendingUser.email);
+                    this.showToast('Login successful!', 'success');
+                    
+                    if (!this.pendingUser.role) {
+                        window.App.showScreen('roleScreen');
+                    } else if (!this.pendingUser.location) {
+                        window.App.showScreen('profileScreen');
+                        this.showRoleSpecificFields(this.pendingUser.role);
+                    } else if (this.pendingUser.role === 'client') {
+                        window.App.showScreen('clientDashboard');
+                        if (window.Client) Client.renderClientDashboard();
+                    } else if (this.pendingUser.role === 'worker') {
+                        window.App.showScreen('workerDashboard');
+                        if (window.Worker) Worker.renderWorkerDashboard();
+                    }
+                    window.App.updateHeader();
+                } else {
+                    Data.addUser({
+                        name: this.pendingUser.name,
+                        email: this.pendingUser.email,
+                        phone: this.pendingUser.phone,
+                        isVerified: true
+                    });
+                    Data.setCurrentUser(this.pendingUser.email);
+                    this.showToast('Verification successful!', 'success');
+                    window.App.showScreen('roleScreen');
+                }
+                return true;
+            },
+            
+            resendOtp: function() {
+                const target = document.getElementById('verificationTarget').innerText;
+                this.showToast(`Demo OTP: ${this.currentOtp} resent to ${target}`, 'success');
+            },
+            
+            setRole: function(role) {
+                Data.setUserRole(Data.currentUser.email, role);
+                this.showRoleSpecificFields(role);
+                window.App.showScreen('profileScreen');
+            },
+            
+            showRoleSpecificFields: function(role) {
+                const workerFields = document.getElementById('workerFields');
+                const clientFields = document.getElementById('clientFields');
+                if (role === 'worker') {
+                    if (workerFields) workerFields.style.display = 'block';
+                    if (clientFields) clientFields.style.display = 'none';
+                } else {
+                    if (workerFields) workerFields.style.display = 'none';
+                    if (clientFields) clientFields.style.display = 'block';
+                }
+            },
+            
+            completeProfile: function() {
+                const profileData = {
+                    location: document.getElementById('location').value,
+                    bio: document.getElementById('bio').value,
+                    profilePhoto: document.getElementById('profilePhoto').value,
+                    skills: document.getElementById('skills')?.value,
+                    hourlyRate: document.getElementById('hourlyRate')?.value,
+                    company: document.getElementById('company')?.value
+                };
+                
+                Data.completeProfile(Data.currentUser.email, profileData);
+                this.showToast('Profile completed!', 'success');
+                
+                if (Data.currentUser.role === 'client') {
+                    window.App.showScreen('clientDashboard');
+                    if (window.Client) Client.renderClientDashboard();
+                } else {
+                    window.App.showScreen('workerDashboard');
+                    if (window.Worker) Worker.renderWorkerDashboard();
+                }
+                window.App.updateHeader();
+            },
+            
+            logout: function() {
+                Data.logout();
+                window.App.showScreen('signupScreen');
+                window.App.updateHeader();
+                this.showToast('Logged out successfully', 'success');
+            }
+        };
+
+        // ========== CLIENT LAYER ==========
+        window.Client = {
+            renderClientDashboard: function() {
+                const currentUser = Data.getCurrentUser();
+                if (!currentUser || currentUser.role !== 'client') return;
+                
+                document.getElementById('clientName').innerText = currentUser.name;
+                this.loadClientGigsWithApplications();
+            },
+            
+            loadClientGigsWithApplications: function() {
+                const gigs = Data.getGigsByClient(Data.currentUser.id);
+                const container = document.getElementById('clientGigsList');
+                if (!container) return;
+                
+                if (gigs.length === 0) {
+                    container.innerHTML = '<p class="empty-message">No gigs posted yet. Create your first gig above!</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                gigs.forEach(gig => {
+                    const applications = Data.getApplicationsByGig(gig.id);
+                    const gigCard = document.createElement('div');
+                    gigCard.className = 'gig-card';
+                    gigCard.style.marginBottom = '1rem';
+                    gigCard.innerHTML = `
+                        <div class="gig-title"><strong>${this.escapeHtml(gig.title)}</strong> <span class="status-badge status-${gig.status}">${gig.status}</span></div>
+                        <div class="gig-description">${this.escapeHtml(gig.description)}</div>
+                        <div class="gig-meta">
+                            <span><i class="fas fa-dollar-sign"></i> $${gig.budget}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${this.escapeHtml(gig.location)}</span>
+                        </div>
+                        <div class="applications-section" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+                            <strong><i class="fas fa-users"></i> Applications (${applications.length})</strong>
+                            <div id="apps-${gig.id}" style="margin-top: 0.5rem;"></div>
+                        </div>
+                    `;
+                    container.appendChild(gigCard);
+                    
+                    const appsContainer = gigCard.querySelector(`#apps-${gig.id}`);
+                    this.renderApplications(appsContainer, applications, gig);
+                });
+            },
+            
+            renderApplications: function(container, applications, gig) {
+                if (applications.length === 0) {
+                    container.innerHTML = '<p class="empty-message" style="font-size: 0.85rem;">No applications yet.</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                applications.forEach(app => {
+                    const appDiv = document.createElement('div');
+                    appDiv.style.background = '#f7fafc';
+                    appDiv.style.padding = '0.75rem';
+                    appDiv.style.borderRadius = '8px';
+                    appDiv.style.marginBottom = '0.5rem';
+                    appDiv.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <strong><i class="fas fa-user"></i> ${this.escapeHtml(app.workerName)}</strong>
+                            <span class="status-badge status-${app.status}">${app.status.toUpperCase()}</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #4a5568; margin-top: 0.25rem;">
+                            <i class="fas fa-comment"></i> "${this.escapeHtml(app.proposal)}"
+                        </div>
+                        <div class="app-action-buttons" style="margin-top: 0.5rem; display: flex; gap: 0.5rem;"></div>
+                    `;
+                    container.appendChild(appDiv);
+                    
+                    const actionButtons = appDiv.querySelector('.app-action-buttons');
+                    
+                    if (gig.status === 'open' && app.status === 'pending') {
+                        actionButtons.innerHTML = `
+                            <button class="btn btn-sm btn-success accept-btn" data-app-id="${app.id}" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">
+                                <i class="fas fa-check"></i> Accept
+                            </button>
+                            <button class="btn btn-sm btn-danger reject-btn" data-app-id="${app.id}" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                        `;
+                        
+                        actionButtons.querySelector('.accept-btn').onclick = () => this.acceptApplication(app.id);
+                        actionButtons.querySelector('.reject-btn').onclick = () => this.rejectApplication(app.id);
+                    } else if (gig.status === 'in_progress' && app.status === 'accepted') {
+                        actionButtons.innerHTML = `
+                            <button class="btn btn-sm btn-primary complete-gig-btn" data-gig-id="${gig.id}" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">
+                                <i class="fas fa-check-double"></i> Mark Complete
+                            </button>
+                        `;
+                        actionButtons.querySelector('.complete-gig-btn').onclick = () => this.completeGig(gig.id);
+                    }
+                });
+            },
+            
+            acceptApplication: function(applicationId) {
+                if (Data.updateApplicationStatus(applicationId, 'accepted')) {
+                    Auth.showToast('Application accepted! Worker has been notified.', 'success');
+                    this.loadClientGigsWithApplications();
+                    if (window.Worker) Worker.renderWorkerDashboard();
+                } else {
+                    Auth.showToast('Failed to accept application', 'error');
+                }
+            },
+            
+            rejectApplication: function(applicationId) {
+                if (Data.updateApplicationStatus(applicationId, 'rejected')) {
+                    Auth.showToast('Application rejected', 'success');
+                    this.loadClientGigsWithApplications();
+                } else {
+                    Auth.showToast('Failed to reject application', 'error');
+                }
+            },
+            
+            completeGig: function(gigId) {
+                if (Data.updateGigStatus(gigId, 'completed')) {
+                    Auth.showToast('Gig marked as completed!', 'success');
+                    this.loadClientGigsWithApplications();
+                    if (window.Worker) Worker.renderWorkerDashboard();
+                } else {
+                    Auth.showToast('Failed to mark gig as completed', 'error');
+                }
+            },
+            
+            postGig: function() {
+                const title = document.getElementById('gigTitle').value;
+                const desc = document.getElementById('gigDesc').value;
+                const budget = document.getElementById('gigBudget').value;
+                const location = document.getElementById('gigLocation').value;
+                
+                if (!title || !desc || !budget || !location) {
+                    Auth.showToast('Please fill all fields', 'error');
+                    return;
+                }
+                
+                Data.addGig({
+                    clientId: Data.currentUser.id,
+                    clientName: Data.currentUser.name,
+                    title: title,
+                    description: desc,
+                    budget: parseFloat(budget),
+                    location: location
+                });
+                
+                Auth.showToast('Gig posted successfully!', 'success');
+                
+                document.getElementById('gigTitle').value = '';
+                document.getElementById('gigDesc').value = '';
+                document.getElementById('gigBudget').value = '';
+                document.getElementById('gigLocation').value = '';
+                
+                this.loadClientGigsWithApplications();
+                if (window.Worker) Worker.renderWorkerDashboard();
+            },
+            
+            escapeHtml: function(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        };
+
+        // ========== WORKER LAYER ==========
+        window.Worker = {
+            renderWorkerDashboard: function() {
+                const currentUser = Data.getCurrentUser();
+                if (!currentUser || currentUser.role !== 'worker') return;
+                
+                document.getElementById('workerName').innerText = currentUser.name;
+                this.loadAvailableGigs();
+                this.loadApplications();
+            },
+            
+            loadAvailableGigs: function() {
+                const gigs = Data.getOpenGigs();
+                const container = document.getElementById('availableGigsList');
+                if (!container) return;
+                
+                if (gigs.length === 0) {
+                    container.innerHTML = '<p class="empty-message">No gigs available nearby.</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                gigs.forEach(gig => {
+                    const hasApplied = Data.hasApplied(Data.currentUser.id, gig.id);
+                    const gigCard = document.createElement('div');
+                    gigCard.className = 'gig-card';
+                    gigCard.style.marginBottom = '1rem';
+                    gigCard.innerHTML = `
+                        <div class="gig-title"><strong>${this.escapeHtml(gig.title)}</strong></div>
+                        <div class="gig-description">${this.escapeHtml(gig.description)}</div>
+                        <div class="gig-meta">
+                            <span><i class="fas fa-user"></i> Client: ${this.escapeHtml(gig.clientName)}</span>
+                            <span><i class="fas fa-dollar-sign"></i> $${gig.budget}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${this.escapeHtml(gig.location)}</span>
+                        </div>
+                        <div class="apply-section" style="margin-top: 0.5rem;"></div>
+                    `;
+                    container.appendChild(gigCard);
+                    
+                    const applySection = gigCard.querySelector('.apply-section');
+                    
+                    if (!hasApplied) {
+                        applySection.innerHTML = `
+                            <textarea id="proposal-${gig.id}" rows="2" placeholder="Write your proposal..." style="width:100%; padding:0.5rem; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:0.5rem;"></textarea>
+                            <button class="btn btn-primary btn-sm apply-btn" data-gig-id="${gig.id}">
+                                <i class="fas fa-paper-plane"></i> Apply
+                            </button>
+                        `;
+                        applySection.querySelector('.apply-btn').onclick = () => this.applyToGig(gig.id);
+                    } else {
+                        applySection.innerHTML = `<span class="status-badge status-pending"><i class="fas fa-clock"></i> Already Applied</span>`;
+                    }
+                });
+            },
+            
+            loadApplications: function() {
+                const apps = Data.getApplicationsByWorker(Data.currentUser.id);
+                const container = document.getElementById('myApplicationsList');
+                if (!container) return;
+                
+                if (apps.length === 0) {
+                    container.innerHTML = '<p class="empty-message">You haven\'t applied to any gigs yet.</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                apps.forEach(app => {
+                    const gig = Data.getGigById(app.gigId);
+                    const statusText = {
+                        'pending': 'Pending Review',
+                        'accepted': 'Accepted! 🎉',
+                        'rejected': 'Not Selected'
+                    }[app.status] || app.status;
+                    
+                    const appCard = document.createElement('div');
+                    appCard.className = 'gig-card';
+                    appCard.style.marginBottom = '1rem';
+                    appCard.innerHTML = `
+                        <div class="gig-title"><strong>${gig ? this.escapeHtml(gig.title) : 'Gig'}</strong></div>
+                        <div class="gig-meta">
+                            <span><i class="fas fa-dollar-sign"></i> $${gig ? gig.budget : 'N/A'}</span>
+                            <span class="status-badge status-${app.status}">${statusText}</span>
+                        </div>
+                        <div style="font-size: 0.85rem; margin-top: 0.5rem;">
+                            <i class="fas fa-comment"></i> Your proposal: "${this.escapeHtml(app.proposal)}"
+                        </div>
+                        <div class="work-action" style="margin-top: 0.5rem;"></div>
+                    `;
+                    container.appendChild(appCard);
+                    
+                    const workAction = appCard.querySelector('.work-action');
+                    
+                    if (app.status === 'accepted' && gig && gig.status === 'in_progress') {
+                        workAction.innerHTML = `
+                            <button class="btn btn-sm btn-success mark-done-btn" data-gig-id="${gig.id}">
+                                <i class="fas fa-check-double"></i> Mark Work Done
+                            </button>
+                        `;
+                        workAction.querySelector('.mark-done-btn').onclick = () => this.markWorkDone(gig.id);
+                    } else if (app.status === 'accepted' && gig && gig.status === 'completed') {
+                        workAction.innerHTML = `<span class="status-badge status-completed"><i class="fas fa-star"></i> Completed - Payment Released</span>`;
+                    }
+                });
+            },
+            
+            applyToGig: function(gigId) {
+                const proposal = document.getElementById(`proposal-${gigId}`)?.value;
+                if (!proposal || proposal.trim() === '') {
+                    Auth.showToast('Please write a proposal before applying', 'error');
+                    return;
+                }
+                
+                const result = Data.addApplication({
+                    gigId: gigId,
+                    workerId: Data.currentUser.id,
+                    workerName: Data.currentUser.name,
+                    proposal: proposal
+                });
+                
+                if (result) {
+                    Auth.showToast('Application submitted! Client will review it.', 'success');
+                    this.renderWorkerDashboard();
+                    if (window.Client) Client.renderClientDashboard();
+                } else {
+                    Auth.showToast('You have already applied to this gig', 'error');
+                }
+            },
+            
+            markWorkDone: function(gigId) {
+                if (Data.updateGigStatus(gigId, 'completed')) {
+                    Auth.showToast('Work marked as completed! Payment will be released.', 'success');
+                    this.renderWorkerDashboard();
+                    if (window.Client) Client.renderClientDashboard();
+                } else {
+                    Auth.showToast('Failed to mark work as done', 'error');
+                }
+            },
+            
+            escapeHtml: function(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        };
+
+        // ========== APP CONTROLLER ==========
+        window.App = {
+            init: function() {
+                console.log('HyperLocal Freelance Hub - Prototype Initialized');
+                Data.loadMockData();
+                this.bindEvents();
+                this.showScreen('signupScreen');
+                this.updateHeader();
+            },
+            
+            bindEvents: function() {
+                document.getElementById('sendOtpBtn').onclick = () => Auth.sendSignupOtp();
+                document.getElementById('showLoginBtn').onclick = (e) => { e.preventDefault(); this.showScreen('loginScreen'); };
+                document.getElementById('sendLoginOtpBtn').onclick = () => Auth.sendLoginOtp();
+                document.getElementById('showSignupFromLoginBtn').onclick = (e) => { e.preventDefault(); this.showScreen('signupScreen'); };
+                document.getElementById('verifyOtpBtn').onclick = () => Auth.verifyOtp(document.getElementById('otpCode').value);
+                document.getElementById('resendOtpBtn').onclick = () => Auth.resendOtp();
+                document.getElementById('completeProfileBtn').onclick = () => Auth.completeProfile();
+                document.getElementById('postGigBtn').onclick = () => Client.postGig();
+                
+                document.querySelectorAll('.role-card').forEach(card => {
+                    card.onclick = () => {
+                        document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+                        card.classList.add('selected');
+                        document.getElementById('confirmRoleBtn').disabled = false;
+                    };
+                });
+                document.getElementById('confirmRoleBtn').onclick = () => {
+                    const selected = document.querySelector('.role-card.selected');
+                    if (selected) Auth.setRole(selected.dataset.role);
+                };
+            },
+            
+            showScreen: function(screenId) {
+                document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+                const target = document.getElementById(screenId);
+                if (target) target.classList.add('active');
+                
+                if (screenId === 'clientDashboard' && Client) Client.renderClientDashboard();
+                if (screenId === 'workerDashboard' && Worker) Worker.renderWorkerDashboard();
+            },
+            
+            updateHeader: function() {
+                const header = document.getElementById('headerActions');
+                if (!header) return;
+                
+                if (Data.currentUser) {
+                    header.innerHTML = `
+                        <span class="user-greeting">
+                            <i class="fas fa-user-circle"></i> ${Data.currentUser.name}
+                        </span>
+                        <button id="logoutBtn" class="btn btn-link">Logout</button>
+                    `;
+                    document.getElementById('logoutBtn').onclick = () => Auth.logout();
+                } else {
+                    header.innerHTML = '<span class="user-greeting"><i class="fas fa-globe"></i> Local Marketplace</span>';
+                }
+            }
+        };
+
+        window.App.init();
+    </script>
+</body>
+</html>
